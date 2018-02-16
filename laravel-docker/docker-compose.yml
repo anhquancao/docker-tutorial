@@ -10,7 +10,7 @@ services:
     environment:
       - "DB_PORT=3306"
       - "DB_HOST=database"
-  web:
+  web:    
     build:
       context: ./nginx
       dockerfile: Dockerfile
@@ -18,7 +18,10 @@ services:
     volumes:
       - ./test-docker:/var/www
     ports:
-      - 8080:80
+      - 80:80
+    depends_on: 
+      - app
+      - database
   database:
     image: mysql:5.7.21
     volumes:
@@ -33,4 +36,3 @@ services:
 
 volumes:
   dbdata:
-    
